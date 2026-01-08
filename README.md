@@ -5,6 +5,8 @@ AutoJudge is a model-based system that predicts the difficulty class (Easy / Med
 
 ## **Dataset used**
 
+Raw JSON file was parsed and converted to CSV file. 
+
 The dataset contains problem title, description, input_description, output_description, problem_class (Easy/Medium/Hard) and problem_score (numeric). All training and test splits were created from this single dataset. 
 
 ## **Approach and models used**
@@ -13,13 +15,17 @@ Text pipeline: concatenate description + input_description + output_description 
 
 Auxiliary features: 14 handcrafted features (length, word count, digit count, symbol count, and 10 keyword counts such as graph, dp, tree, math, greedy, recursion, string, array, sort, search), scaled with a StandardScaler. 
 
+Trained model in Releases section includes model_pre_final.ipynb notebook which consists Data preprocessing, Feature extraction, training classification and regression models, hyperparamter tuning, and other evaluation.
+
+app.py is a streamlit code to develop the web UI interface.
+
 ***Models:***
 
 Classification: RandomForestClassifier (or other tree-based ensemble selected by validation).
 
 Regression: RandomForestRegressor / GradientBoostingRegressor for numeric difficulty score.
 
-Final inference concatenates TF–IDF features and scaled auxiliary features, then predicts class and score. Artifacts saved as best_clf_model.pkl, best_reg_model.pkl, tfidf_vectorizer.pkl, aux_scaler.pkl, and label_encoder.pkl. 
+Final inference concatenates TF–IDF features approx 5K features and scaled auxiliary features, then predicts class and score. Artifacts saved as best_clf_model.pkl, best_reg_model.pkl, tfidf_vectorizer.pkl, aux_scaler.pkl, and label_encoder.pkl. 
 
 ## **Evaluation metrics**
 
